@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Sales Analysis using TopN Filter DAX"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "28dd2740-ea36-4727-a5d8-dd140fc479d3"
+  }
+}

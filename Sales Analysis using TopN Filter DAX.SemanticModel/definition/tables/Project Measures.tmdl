@@ -1,0 +1,62 @@
+table 'Project Measures'
+	lineageTag: ba10269b-dcfd-4db2-b3df-573bdbb94c10
+
+	measure 'Net Revenue' =
+			
+			SUMX( sales, sales[quantity] * (sales[price] * (1 - RELATED(products[tax rate]))))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2e49f3e9-1211-4357-8b04-75f92ac5b970
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Revenue' = SUMX(sales, sales[price] * sales[quantity])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 35bbceac-e134-42f9-aaec-8c88e590fd33
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Profit' = SUMX(sales, sales[quantity] * sales[price] *RELATED(products[profit margine]))
+		lineageTag: 0bcdabe7-5bf3-47df-ad72-28fbca850b2b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Top N Product by Revenue' = CALCULATE([Gross Revenue],FILTER(products, products[Rank by Revenue] <= MAX('TopN table'[TopNvalue])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d0542eac-6188-4082-bc11-3f074e8dbce0
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Gross Revenue running total in Date' =
+			
+			CALCULATE(
+				[Gross Revenue],
+				FILTER(
+					ALLSELECTED('DateTable'[Date]),
+					ISONORAFTER('DateTable'[Date], MAX('DateTable'[Date]), DESC)
+				)
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 75f90024-3205-40bb-9eb1-a5cf0dde7274
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "RunningTotal"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition 'Project Measures' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

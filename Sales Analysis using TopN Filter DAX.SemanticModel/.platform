@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Sales Analysis using TopN Filter DAX"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "65eefa74-4621-4fc6-9723-08af34977656"
+  }
+}
