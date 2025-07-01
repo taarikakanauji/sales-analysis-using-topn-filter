@@ -1,0 +1,97 @@
+table sales
+	lineageTag: 4d772746-c5fe-435e-a789-0a61895024e0
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bf42822-8efb-4651-a61c-b9f204394804
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b4483487-5aee-4b64-8d01-2afbd0e38a08
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e98b4c4a-3231-4e3b-b8fe-a7f8a30447a4
+		summarizeBy: none
+		sourceColumn: location_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d2c172c-e09a-4695-8ce8-47ec6c24b618
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a033d75-2418-4834-8505-45811fc20f2d
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9f0ad063-aa2a-4234-b991-eeaf960d2fba
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ba0b97d-7873-49ec-a653-723cece45472
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column price = RELATED(products[price])
+		lineageTag: e64f7ac3-5d08-4f9b-91a6-e78d7c77d384
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Revenue = sales[quantity] * sales[price]
+		lineageTag: cf98b1ca-0101-4f72-b6c4-e29a48cacbd8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("E:\PORTFOLIO\DAX\sales-data.xlsx"), null, true),
+				    sales_Sheet = Source{[Item="sales",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(sales_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id", Int64.Type}, {"customer_id", Int64.Type}, {"location_id", Int64.Type}, {"product_id", Int64.Type}, {"employee_id", Int64.Type}, {"date", type date}, {"quantity", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

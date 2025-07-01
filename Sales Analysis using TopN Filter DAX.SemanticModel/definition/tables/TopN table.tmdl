@@ -1,0 +1,36 @@
+table 'TopN table'
+	lineageTag: 7eeb930a-0059-4687-8389-2fdda4e95a4b
+
+	column TopNvalue
+		dataType: int64
+		formatString: #,0
+		lineageTag: 89e95f19-7b44-407d-a6b8-95b266c64acb
+		summarizeBy: sum
+		sourceColumn: TopNvalue
+
+		annotation SummarizationSetBy = Automatic
+
+	column TopNname
+		dataType: string
+		lineageTag: 0195376d-385d-4c53-9765-bdc0e2278627
+		summarizeBy: none
+		sourceColumn: TopNname
+		sortByColumn: TopNvalue
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'TopN table' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlbSUQrJL1AwVorViVYyhfJMwTxDAygXyADxjWB8IwjfFMY3NYCqBwk45uQoxcYCAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [TopNvalue = _t, TopNname = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"TopNvalue", Int64.Type}, {"TopNname", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

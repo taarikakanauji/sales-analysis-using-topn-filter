@@ -1,0 +1,33 @@
+table employee
+	lineageTag: dd35e08e-0b61-466b-8dbe-cebd64a4f057
+
+	column employee_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 073848ea-8dac-4acc-8783-0eeda6c10cc0
+		summarizeBy: none
+		sourceColumn: employee_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 6e5885f6-82a5-4c13-af9d-00c5677025ef
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition employee = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("E:\PORTFOLIO\DAX\sales-data.xlsx"), null, true),
+				    employee_Sheet = Source{[Item="employee",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(employee_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"employee_id", Int64.Type}, {"name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,78 @@
+table location
+	lineageTag: c298c846-aec7-4a21-8a39-31eaa35247e8
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5360d867-36b9-4ae4-8034-f0254bea1fab
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 60bd3bf9-4756-47ab-b7d3-d98eb3aedf9d
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column countries
+		dataType: string
+		lineageTag: 33359e19-7520-4181-aeb7-d445b1b49839
+		summarizeBy: none
+		sourceColumn: countries
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zip code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fa3bead-878f-40fe-b61f-d42e5d45bc53
+		summarizeBy: none
+		sourceColumn: zip code
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 96ee4a7c-7ac2-4042-bc68-77570b5ed554
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: cc458195-e86f-496f-a3e3-aae52f6386df
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column state
+		dataType: string
+		lineageTag: 036f7bd1-24fe-459a-98c8-6f8b501d8014
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	partition location = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("E:\PORTFOLIO\DAX\sales-data.xlsx"), null, true),
+				    location_Sheet = Source{[Item="location",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(location_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id", Int64.Type}, {"city", type text}, {"countries", type text}, {"zip code", Int64.Type}, {"latitude", type number}, {"longitude", type number}, {"state", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

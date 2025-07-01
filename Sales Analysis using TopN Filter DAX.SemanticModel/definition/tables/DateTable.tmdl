@@ -1,0 +1,164 @@
+table DateTable
+	lineageTag: 07c0e166-95ff-47b5-885a-81fede9ac423
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: e1cd2983-f9a3-40fb-a998-6f5766685c7b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DateAsInteger
+		lineageTag: 055eb720-1f2d-4887-ae3e-91f5fdb25fc8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DateAsInteger]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 25de732f-0d0c-4e00-99df-8fa4cdb10a78
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNo
+		lineageTag: 14df221e-d271-423a-a6c5-f4243a2e6eb5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthNo
+		lineageTag: 687c87d1-d131-4cee-8d1e-49349bfebe32
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		lineageTag: 6dba393b-1484-4079-b5d2-8f9d9283da13
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonth]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthShort
+		lineageTag: db46f8b1-d807-4f39-8753-9187120d242b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthShort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthLong
+		lineageTag: 7918526b-7508-45eb-8d2e-4732ddccc0b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthLong]
+		sortByColumn: MonthNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekNo
+		formatString: 0
+		lineageTag: 3ed60654-9ac8-4f45-b114-7249329c5005
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [WeekNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDay
+		lineageTag: a02ac8bf-f6b5-4bdd-a338-b8d2fe573bdf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [WeekDay]
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayShort
+		lineageTag: ce05b16a-5893-4d51-be41-20398b33bf35
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [WeekDayShort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: fdb16c44-289e-410e-8556-d606a6ea21c0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarter
+		lineageTag: 28a6057f-d5fd-4484-93c6-157d9afc6955
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearQuarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayNo
+		lineageTag: b6bd5dbd-a576-4914-85de-5e4aee4bc6ae
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DayNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Date Hierarchy'
+		lineageTag: 10eb13e9-9559-4eaf-b055-1a8c54eaa526
+
+		level Year
+			lineageTag: 65aacce7-e53f-424b-af77-63ea84969e15
+			column: Year
+
+		level Quarter
+			lineageTag: adfb2f7a-595e-4488-a72a-85510444ac2e
+			column: Quarter
+
+		level MonthLong
+			lineageTag: e10ec6a2-4883-4ead-8ea0-316adff28ded
+			column: MonthLong
+
+		level DayNo
+			lineageTag: fcdae76d-cc91-47a0-839b-bfaafdbd144d
+			column: DayNo
+
+	partition DateTable = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS ( 
+				CALENDAR(MINX('sales','sales'[date]),MAXX('sales','sales'[date])),
+				"DateAsInteger", FORMAT ( [date], "YYYYMMDD" ),
+				 "Year", YEAR ( [date] ), "MonthNo", FORMAT ( [date], "MM" ), 
+				"YearMonthNo", FORMAT ( [date], "YYYY/MM" ), 
+				"YearMonth", FORMAT ( [date], "YYYY/mmm" ), 
+				"MonthShort", FORMAT ( [date], "mmm" ),
+				"MonthLong", FORMAT ( [date], "mmmm" ), 
+				"DayNo", FORMAT([Date],"dd"),
+				"WeekNo", WEEKDAY ( [date] ), 
+				"WeekDay", FORMAT ( [date], "dddd" ), 
+				"WeekDayShort", FORMAT ( [date], "ddd" ), 
+				"Quarter", "Q" & FORMAT ( [date], "Q" ), 
+				"YearQuarter", FORMAT ( [date], "YYYY" ) & "/Q" & FORMAT ( [date], "Q" ))
+				```
+
+	annotation PBI_Id = c07f87244ecf44aba0ff8d199588e9f7
+

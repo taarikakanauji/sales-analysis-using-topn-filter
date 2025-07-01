@@ -1,0 +1,68 @@
+table products
+	lineageTag: 5faf7f21-2c25-4683-9bcf-0e36a57ecfd5
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 26ed8f8f-3ff9-4a1b-aab3-11c5e5816f0d
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product
+		dataType: string
+		lineageTag: d4d912aa-6b40-453f-bb23-4250f0c7a861
+		summarizeBy: none
+		sourceColumn: product
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		formatString: 0.00
+		lineageTag: deb7bc72-9dbf-4d7b-984f-5cc636ae6844
+		summarizeBy: none
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'profit margine'
+		dataType: double
+		lineageTag: d55d0aa1-9293-4835-9148-3aae530122ac
+		summarizeBy: none
+		sourceColumn: profit margine
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'tax rate'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 019b054d-dc45-449c-9303-68455690d5c7
+		summarizeBy: none
+		sourceColumn: tax rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rank by Revenue' = CALCULATE(RANKX(ALL(products),[Gross Revenue]))
+		formatString: 0
+		lineageTag: 9cad8702-d515-4730-bbff-c506280b2f03
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition products = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("E:\PORTFOLIO\DAX\sales-data.xlsx"), null, true),
+				    products_Sheet = Source{[Item="products",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(products_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"product_id", Int64.Type}, {"product", type text}, {"price", type number}, {"profit margine", type number}, {"tax rate", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

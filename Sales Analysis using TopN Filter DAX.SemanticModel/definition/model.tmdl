@@ -1,0 +1,27 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["customer","employee","location","products","sales","TopN table","Project Measures"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table customer
+ref table employee
+ref table location
+ref table products
+ref table sales
+ref table DateTable
+ref table 'TopN table'
+ref table 'Project Measures'
+
+ref cultureInfo en-CA
+
