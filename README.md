@@ -170,10 +170,10 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 # **Project Resources: Sales Analysis using Top N Filter**  
 
 ### **Detailed Report (PDF)**  
-[Insights of Sales Analysis using Top N Filter](https://github.com/taarikakanauji/customer-segmentation-of-the-superstore/blob/main/Insights%20of%20Customer%20Segmentation%20of%20the%20Superstore.pdf)  
+[Insights of Sales Analysis using Top N Filter](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/blob/main/Insights%20for%20Sales%20Analysis%20using%20TopN%20Filter.pdf)  
 
 ### **Power BI Desktop Demo**  
-[Power BI Demo (MKV)](https://github.com/taarikakanauji/customer-segmentation-of-the-superstore/blob/main/Power%20BI%20Demo.mkv)  
+[Power BI Demo (MKV)](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/blob/main/Power%20BI%20Demo%20for%20TopN%20filter.mkv)  
 
 
 ### **PBIP Files**  
