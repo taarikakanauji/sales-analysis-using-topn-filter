@@ -4,7 +4,7 @@
 
 
 
-!\[Power BI Report - Home View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/home.jpg)
+!\[Power BI Report - Home View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/home.JPG)
 
 
 
@@ -188,7 +188,7 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 
 
 
-&nbsp; !\[Power BI Report - Revenue by TopN](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/revenue%20by%20topn.jpg)
+&nbsp; !\[Power BI Report - Revenue by TopN](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/revenue%20by%20topn.JPG)
 
 
 
@@ -218,7 +218,7 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 
 
 
-&nbsp; !\[Power BI Report - Products View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/products.jpg)
+&nbsp; !\[Power BI Report - Products View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/products.JPG)
 
 
 
@@ -250,7 +250,7 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 
 
 
-&nbsp; !\[Power BI Report - Revenue by Date](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/revenue%20by%20date.jpg)
+&nbsp; !\[Power BI Report - Revenue by Date](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/revenue%20by%20date.JPG)
 
 
 
@@ -284,7 +284,7 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 
 
 
-&nbsp;   !\[Power BI Report - Running Total](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/running%20total.jpg)
+&nbsp;   !\[Power BI Report - Running Total](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/running%20total.JPG)
 
 
 
@@ -318,15 +318,15 @@ To build the Sales Analysis dashboard in Power BI with Top N filtering, I follow
 
 
 
-!\[Power BI Report - TopN Page](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/topn.jpg)
+!\[Power BI Report - TopN Page](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/topn.JPG)
 
 
 
-&nbsp; !\[Power BI Report - Year Quarter View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/year-quarter.jpg)
+&nbsp; !\[Power BI Report - Year Quarter View](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/year-quarter.JPG)
 
 
 
-&nbsp; !\[Power BI Report - Name Page](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/name.jpg)
+&nbsp; !\[Power BI Report - Name Page](https://github.com/taarikakanauji/sales-analysis-using-topn-filter/raw/main/images/name.JPG)
 
 
 
